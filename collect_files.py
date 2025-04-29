@@ -15,10 +15,7 @@ def ensure(dir_path):
 
 
 if len(sys.argv) >= 5 and sys.argv[3] == "--max_depth":
-	try:
-		depth = int(sys.argv[4])
-	except:
-		depth = None
+	depth = int(sys.argv[4])
 
 ensure(dst)
 
@@ -26,10 +23,9 @@ for root, dirs, files in os.walk(src):
 	rel = os.path.relpath(root, src)
 	parts = [] if rel == "." else rel.split(os.sep)
 
-	level = len(parts) + 1
 	if depth is not None:
-	while len(parts) > depth - 1:
-		parts.pop(0)
+		while len(parts) > depth - 1:
+			parts.pop(0)
 
 	target_dir = os.path.join(dst, *parts) if parts else dst
 	ensure(target_dir)
