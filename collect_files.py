@@ -27,7 +27,8 @@ for root, dirs, files in os.walk(src):
 	parts = [] if rel == "." else rel.split(os.sep)
 
 	level = len(parts) + 1
-	if depth is not None and level > depth and parts:
+	if depth is not None:
+	while len(parts) > depth - 1:
 		parts.pop(0)
 
 	target_dir = os.path.join(dst, *parts) if parts else dst
